@@ -12,16 +12,16 @@ namespace RestaurantReviewApp.Services
         public RestaurantService(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-        }
+        }       
 
-        async Task<Restaurant> IRestaurantService.AddRestaurantAsync(Restaurant restaurant)
+        public async Task<Restaurant> AddRestaurantAsync(Restaurant restaurant)
         {
             _dbContext.Restaurants.Add(restaurant);
             await _dbContext.SaveChangesAsync();
             return restaurant;
         }
 
-        async Task<bool> IRestaurantService.DeleteRestaurantAsync(int id)
+        public async Task<bool> DeleteRestaurantAsync(int id)
         {
             var restaurant = await _dbContext.Restaurants.FindAsync(id);
             if (restaurant == null)
@@ -32,17 +32,17 @@ namespace RestaurantReviewApp.Services
             return true;
         }
 
-        async Task<IEnumerable<Restaurant>> IRestaurantService.GetAllRestaurantsAsync()
+        public async Task<IEnumerable<Restaurant>> GetAllRestaurantsAsync()
         {
             return await _dbContext.Restaurants.ToListAsync();
         }
 
-        async Task<Restaurant?> IRestaurantService.GetRestaurantByIdAsync(int id)
+        public async Task<Restaurant?> GetRestaurantByIdAsync(int id)
         {
             return await _dbContext.Restaurants.FindAsync(id);
         }
 
-        async Task<bool> IRestaurantService.UpdateRestaurantAsync(Restaurant restaurant)
+        public async Task<bool> UpdateRestaurantAsync(Restaurant restaurant)
         {
             var existingRestaurant = await _dbContext.Restaurants.FindAsync(restaurant.Id);
             if (existingRestaurant == null)
