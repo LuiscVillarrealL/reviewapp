@@ -1,0 +1,15 @@
+# .gitignore for .NET
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.cache
+*.swp
+*.log
+*.nupkg
+packages/
+.DS_Store
+.env
+docker-compose.override.yml
