@@ -10,13 +10,13 @@ namespace RestaurantReviewApp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RestaurantController : ControllerBase
+    public class RestaurantsController : ControllerBase
     {
 
         private readonly IRestaurantService _restaurantService;
         private readonly IMapper _mapper;
 
-        public RestaurantController(IRestaurantService restaurantService, IMapper mapper)
+        public RestaurantsController(IRestaurantService restaurantService, IMapper mapper)
         {
             _restaurantService = restaurantService;
             _mapper = mapper;
@@ -55,7 +55,8 @@ namespace RestaurantReviewApp.Controllers
             if (id != restaurantDto.Id)
                 return BadRequest();
 
-            var restaurant = _mapper.Map<Restaurant>(restaurantDto);
+            Restaurant restaurant = _mapper.Map<Restaurant>(restaurantDto);
+            restaurant.Id = id;
 
             var success = await _restaurantService.UpdateRestaurantAsync(restaurant);
             if (!success)

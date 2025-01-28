@@ -8,8 +8,21 @@ namespace RestaurantReviewApp.Util
     {
         public MappingProfile()
         {
-            // Map Restaurant to RestaurantDto and vice versa
-            CreateMap<Restaurant, RestaurantDto>().ReverseMap();
+            // Restaurant Mappings
+            CreateMap<Restaurant, RestaurantDto>();
+
+            // Map RestaurantDto to Restaurant and ignore Id and AverageRating
+            CreateMap<RestaurantDto, Restaurant>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.AverageRating, opt => opt.Ignore());
+
+
+            //User Mappings
+            CreateMap<User, UserDto>();
+
+            CreateMap<UserDto, User>()
+               .ForMember(dest => dest.Id, opt => opt.Ignore());
+
         }
     }
 }
